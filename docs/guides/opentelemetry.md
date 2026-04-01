@@ -12,7 +12,7 @@ This is because Prometheus can work without any authentication, so it would not 
 safe to accept incoming traffic unless explicitly configured.
 
 To enable the receiver you need to toggle the CLI flag `--web.enable-otlp-receiver`.
-This will cause Prometheus to serve OTLP metrics receiving on HTTP `/api/v1/otlp/v1/metrics` path.
+This will cause Prometheus to receive OTLP metrics at the HTTP `/api/v1/otlp/v1/metrics` path.
 
 ```shell
 $ prometheus --web.enable-otlp-receiver
