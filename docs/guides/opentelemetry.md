@@ -23,34 +23,11 @@ $ prometheus --web.enable-otlp-receiver
 Generally you need to tell the source of the OTLP metrics traffic about Prometheus endpoint and the fact that the
 [HTTP](https://opentelemetry.io/docs/specs/otlp/#otlphttp) mode of OTLP should be used (gRPC is usually a default).
 
-OpenTelemetry SDKs and instrumentation libraries can be usually configured via [standard environment variables](https://opentelemetry.io/docs/languages/sdk-configuration/). The following are the OpenTelemetry variables needed to send OpenTelemetry metrics to a Prometheus server on localhost:
-
-```shell
-export OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
-export OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=http://localhost:9090/api/v1/otlp/v1/metrics
-```
-
-Turn off traces and logs:
-
-```shell
-export OTEL_TRACES_EXPORTER=none
-export OTEL_LOGS_EXPORTER=none
-```
-
-The default push interval for OpenTelemetry metrics is 60 seconds. The following will set a 15-second push interval:
-
-```shell
-export OTEL_METRIC_EXPORT_INTERVAL=15000
-```
-
-If your instrumentation library does not provide `service.name` and `service.instance.id` out-of-the-box, it is highly recommended to set them.
-
-```shell
-export OTEL_SERVICE_NAME="my-example-service"
-export OTEL_RESOURCE_ATTRIBUTES="service.instance.id=$(uuidgen)"
-```
-
-The above assumes that `uuidgen` command is available on your system. Make sure that `service.instance.id` is unique for each instance, and that a new `service.instance.id` is generated whenever a resource attribute changes. The [recommended](https://github.com/open-telemetry/semantic-conventions/tree/main/docs/resource) way is to generate a new UUID on each startup of an instance.
+To do this, see the OpenTelemetry Exporters page for your application’s language:
+- [Exporters page for C++](https://opentelemetry.io/docs/languages/cpp/exporters/#prometheus)
+- [Exporters page for .NET](https://opentelemetry.io/docs/languages/dotnet/exporters/#prometheus)
+- [Exporters page for JavaScript](https://opentelemetry.io/docs/languages/js/exporters/#prometheus)
+- [Exporters page for Python](https://opentelemetry.io/docs/languages/python/exporters/#prometheus)
 
 ## Configuring Prometheus
 
